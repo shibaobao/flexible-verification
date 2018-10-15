@@ -10,7 +10,7 @@ describe('Verify', () => {
       const data1 = 'String', validation1 = 'string';
       const data2 = '{"name":"name","age":15}', validation2 = 'json-string';
       const data3 = { name:"name",age:15 }, validation3 = 'json-object';
-      expect(verify(data1, validation1).result).to.equal(true);
+      expect(verify(data1, validation1).result).to.equal(false);
       expect(verify(data2, validation2).result).to.equal(true);
       expect(verify(data2, validation3).result).to.equal(true);
       expect(verify(data1, validation1).message).to.equal('');

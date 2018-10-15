@@ -1,0 +1,16 @@
+language: node_js
+
+cache:
+  directories:
+    - node_modules
+
+node_js:
+  - "8.11.1"
+
+branches:
+  only:
+    - master
+    - develop
+
+script:
+  - npm test

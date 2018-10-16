@@ -1,6 +1,8 @@
 const validationRules = {
+  'email': (input) => /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/.test(input),
   'string': (input) => typeof input === 'string',
   'number': (input) => typeof input === 'number',
+  'array': (input) => input != null && typeof input != 'function' && (input.length > -1 && input.length % 1 == 0),
   'json-string': (input) => {
     try {
       JSON.parse(input);
@@ -63,6 +65,10 @@ function verifyItem (input, validations) {
   return result;
 }
 
+function listValidationRules() {
+  return Object.keys(validationRules);
+}
+
 function addValidationRule (validationName, validationFunction) {
   if (typeof validationFunction !== 'function') {
     throw new Error('Parameter mast be a function');
@@ -71,6 +77,7 @@ function addValidationRule (validationName, validationFunction) {
     return;
   }
   validationRules[validationName] = validationFunction;
+  return listValidationRules();
 }
 
 function removeValidationRule (validationName) {
@@ -78,10 +85,6 @@ function removeValidationRule (validationName) {
     delete validationRules[validationName];
   }
   return listValidationRules();
-}
-
-function listValidationRules () {
-  return Object.keys(validationRules);
 }
 
 module.exports = {

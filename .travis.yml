@@ -12,5 +12,12 @@ branches:
     - master
     - develop
 
+env:  
+  global:
+    - CODECOV_TOKEN: d479805e-2147-4d15-b009-7c4f2a88e0f7
+
 script:
   - npm test
+  - npm run report-coverage
+  - istanbul cover node_modules/mocha/bin/_mocha
+  - cat ./coverage/coverage.json | node_modules/codecov.io/bin/codecov.io.js
